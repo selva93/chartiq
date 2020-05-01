@@ -1,0 +1,152 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "charIQ": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "",
+      "sourceRoot": "src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/charIQ",
+            "index": "src/index.html",
+            "main": "src/main.ts",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "src/favicon.ico",
+              "src/assets"
+            ],
+            "styles": [
+              "src/styles.scss"
+            ],
+            "scripts": [
+              "node_modules/jquery/dist/jquery.js",
+              "src/app/chartiq/js/thirdparty/promise.min.js",
+              "src/app/chartiq/js/thirdparty/@webcomponents/template.js",
+              "src/app/chartiq/js/thirdparty/@webcomponents/custom-elements.min.js",
+              "src/app/chartiq/js/thirdparty/@webcomponents/native-shim.js",
+              "src/app/chartiq/js/thirdparty/html2canvas.js",
+              "src/app/chartiq/js/thirdparty/perfect-scrollbar.jquery.js",
+              "src/app/chartiq/js/chartiq.js",
+              "src/app/chartiq/js/addOns.js",
+              "src/app/chartiq/examples/feeds/quoteFeedSimulator.js",
+              "src/app/chartiq/examples/feeds/symbolLookupChartIQ.js",
+              "src/app/chartiq/examples/markers/markersSample.js",
+              "src/app/chartiq/examples/markers/tradeAnalyticsSample.js",
+              "src/app/chartiq/examples/markets/marketDefinitionsSample.js",
+              "src/app/chartiq/examples/markets/marketSymbologySample.js",
+              "src/app/chartiq/examples/translations/translationSample.js",
+              "src/app/chartiq/js/componentUI.js",
+              "src/app/chartiq/js/components.js",
+              "src/app/chartiq/examples/templates/js/sample-template.js"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "charIQ:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "charIQ:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "charIQ:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "src/test.ts",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "tsconfig.spec.json",
+            "karmaConfig": "karma.conf.js",
+            "assets": [
+              "src/favicon.ico",
+              "src/assets"
+            ],
+            "styles": [
+              "src/styles.scss"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "tsconfig.app.json",
+              "tsconfig.spec.json",
+              "e2e/tsconfig.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "e2e/protractor.conf.js",
+            "devServerTarget": "charIQ:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "charIQ:serve:production"
+            }
+          }
+        }
+      }
+    }
+  },
+  "defaultProject": "charIQ",
+  "cli": {
+    "analytics": "39bc5951-18d3-4c73-8998-8aa959b11fa7"
+  }
+}
